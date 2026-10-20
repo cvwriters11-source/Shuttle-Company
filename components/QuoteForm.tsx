@@ -72,11 +72,11 @@ export function QuoteForm({ compact = false }: QuoteFormProps) {
           </label>
           <label className="wide">
             Pick-Up Location <span>*</span>
-            <AddressField name="pickup" placeholder="Start typing an address" required />
+            <AddressField name="pickup" placeholder="South African address" required />
           </label>
           <label className="wide">
             Drop-Off Location <span>*</span>
-            <AddressField name="dropoff" placeholder="Start typing an address" required />
+            <AddressField name="dropoff" placeholder="South African address" required />
           </label>
           <label>
             Number of Passengers <span>*</span>

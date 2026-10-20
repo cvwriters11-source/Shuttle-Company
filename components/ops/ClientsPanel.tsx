@@ -51,11 +51,11 @@ export function ClientsPanel({ initialClients }: { initialClients: Client[] }) {
           </label>
           <label>
             Pick-up
-            <AddressField name="pickup" required placeholder="Start typing an address" />
+            <AddressField name="pickup" required placeholder="South African address" />
           </label>
           <label>
             Drop-off
-            <AddressField name="dropoff" required placeholder="Start typing an address" />
+            <AddressField name="dropoff" required placeholder="South African address" />
           </label>
           <label>
             Notes

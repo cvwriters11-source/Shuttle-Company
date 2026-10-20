@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
-import { formatPhotonAddress, matchLandmarks, mergePlaceSuggestions, type PlaceSuggestion } from "@/lib/places";
+import {
+  formatPhotonAddress,
+  isSouthAfricaPlace,
+  matchLandmarks,
+  mergePlaceSuggestions,
+  type PlaceSuggestion,
+} from "@/lib/places";
 
 export const dynamic = "force-dynamic";
 
 type PhotonResponse = {
   features?: { properties?: Parameters<typeof formatPhotonAddress>[0] }[];
 };
+
+function southAfricaQuery(query: string) {
+  return /south africa/i.test(query) ? query : `${query}, South Africa`;
+}
 
 export async function GET(request: Request) {
   const query = new URL(request.url).searchParams.get("q")?.trim() ?? "";
@@ -16,10 +26,11 @@ export async function GET(request: Request) {
 
   try {
     const url = new URL("https://photon.komoot.io/api/");
-    url.searchParams.set("q", query);
-    url.searchParams.set("limit", "8");
+    url.searchParams.set("q", southAfricaQuery(query));
+    url.searchParams.set("limit", "15");
     url.searchParams.set("lat", "-26.2041");
     url.searchParams.set("lon", "28.0473");
+    url.searchParams.set("bbox", "16.3,-34.85,32.95,-22.1");
     url.searchParams.set("lang", "en");
 
     const response = await fetch(url, {
@@ -30,9 +41,12 @@ export async function GET(request: Request) {
     if (response.ok) {
       const data = (await response.json()) as PhotonResponse;
       remote = (data.features ?? [])
-        .map((feature) => formatPhotonAddress(feature.properties ?? {}))
-        .filter((label) => label.length > 4)
-        .map((label) => ({ label }));
+        .map((feature) => {
+          const properties = feature.properties ?? {};
+          const label = formatPhotonAddress(properties);
+          return isSouthAfricaPlace(properties, label) ? { label } : null;
+        })
+        .filter((place): place is PlaceSuggestion => Boolean(place?.label && place.label.length > 4));
     }
   } catch {
     remote = [];

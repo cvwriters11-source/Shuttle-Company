@@ -106,6 +106,15 @@ type PhotonProperties = {
   countrycode?: string;
 };
 
+export function isSouthAfricaPlace(properties: PhotonProperties, label: string) {
+  const code = normalize(properties.countrycode ?? "");
+  const country = normalize(properties.country ?? "");
+  const text = normalize(label);
+  if (code && code !== "za" && code !== "zaf") return false;
+  if (country && country !== "south africa" && country !== "republic of south africa") return false;
+  return Boolean(code || country || text.includes("south africa"));
+}
+
 export function formatPhotonAddress(properties: PhotonProperties) {
   const street = [properties.housenumber, properties.street].filter(Boolean).join(" ");
   const parts = [
@@ -115,9 +124,9 @@ export function formatPhotonAddress(properties: PhotonProperties) {
     properties.city || properties.county,
     properties.state,
     properties.postcode,
-    properties.country,
   ].filter(Boolean);
-  return [...new Set(parts)].join(", ");
+  const label = [...new Set(parts)].join(", ");
+  return label ? `${label}, South Africa` : "";
 }
 
 export function mergePlaceSuggestions(...lists: PlaceSuggestion[][]) {
