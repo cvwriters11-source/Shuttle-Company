@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { submitQuote, type QuoteState } from "@/app/actions/quote";
+import { AddressField } from "@/components/AddressField";
 
 type QuoteFormProps = { compact?: boolean };
 
@@ -66,16 +67,16 @@ export function QuoteForm({ compact = false }: QuoteFormProps) {
             <input name="time" type="time" required />
           </label>
           <label>
-            Flight Number
+            Flight Number <span className="optional">(optional)</span>
             <input name="flight" placeholder="e.g. SA123" />
           </label>
           <label className="wide">
             Pick-Up Location <span>*</span>
-            <input name="pickup" placeholder="e.g. O.R. Tambo, hotel, address" required />
+            <AddressField name="pickup" placeholder="Start typing an address" required />
           </label>
           <label className="wide">
             Drop-Off Location <span>*</span>
-            <input name="dropoff" placeholder="Hotel, lodge or address" required />
+            <AddressField name="dropoff" placeholder="Start typing an address" required />
           </label>
           <label>
             Number of Passengers <span>*</span>

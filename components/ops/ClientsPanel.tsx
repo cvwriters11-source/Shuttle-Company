@@ -3,6 +3,7 @@
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { addClient, type OpsState } from "@/app/actions/ops";
+import { AddressField } from "@/components/AddressField";
 import { formatWhen } from "@/lib/ops";
 
 type Client = {
@@ -50,11 +51,11 @@ export function ClientsPanel({ initialClients }: { initialClients: Client[] }) {
           </label>
           <label>
             Pick-up
-            <input name="pickup" required placeholder="O.R. Tambo arrivals" />
+            <AddressField name="pickup" required placeholder="Start typing an address" />
           </label>
           <label>
             Drop-off
-            <input name="dropoff" required placeholder="Hotel, lodge or address" />
+            <AddressField name="dropoff" required placeholder="Start typing an address" />
           </label>
           <label>
             Notes

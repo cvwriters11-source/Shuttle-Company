@@ -7,3 +7,7 @@ npm-debug.log*
 *.tsbuildinfo
 /data/ops.json
 supabase/.temp/
+.vercel/
+
+.vercel
+.env*

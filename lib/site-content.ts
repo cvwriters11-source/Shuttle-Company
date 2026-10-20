@@ -10,6 +10,17 @@ export type SitePage = {
   faqs?: FAQ[];
 };
 
+export const heroReserves = [
+  { label: "Kruger National Park", image: "/images/hero.webp" },
+  { label: "Madikwe Game Reserve", image: "/images/madikwe.webp" },
+  { label: "Pilanesberg", image: "/images/pilanesberg.webp" },
+  { label: "Sabi Sands", image: "/images/sabi-sands.webp" },
+  { label: "Welgevonden", image: "/images/welgevonden.webp" },
+  { label: "Hoedspruit", image: "/images/hoedspruit.webp" },
+  { label: "Marataba", image: "/images/marataba.webp" },
+  { label: "Nambiti", image: "/images/nambiti.webp" },
+];
+
 export const destinations = [
   { label: "Hoedspruit", slug: "hoedspruit-shuttle-service", image: "/images/hoedspruit.webp" },
   { label: "Mabula", slug: "mabula-shuttle-service", image: "/images/mabula.webp" },

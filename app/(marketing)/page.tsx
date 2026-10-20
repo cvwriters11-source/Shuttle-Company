@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Baby, BriefcaseBusiness, Check, Luggage, MapPin, Plane, ShieldCheck, Users } from "lucide-react";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { QuoteForm } from "@/components/QuoteForm";
-import { destinations, reasons, services } from "@/lib/site-content";
+import { destinations, heroReserves, reasons, services } from "@/lib/site-content";
 
 const fleet = [
   { name: "10 Seater Minivan", image: "/images/minivan-10-professional.webp" },
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <main>
       <section className="home-hero">
+        <HeroSlideshow slides={heroReserves} />
         <div className="shell hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">PREMIUM <b>• PRIVATE • BESPOKE</b></p>
